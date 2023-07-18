@@ -52,8 +52,8 @@ namespace LoggingKata
             // Create a `double` variable to store the distance - DONE
             ITrackable tacoBell1 = null;
             ITrackable tacoBell2 = null;
-            double distance;
-            double newDistance;
+            double distance = 0;
+            double newDistance = 0;
 
             // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
 
@@ -63,42 +63,42 @@ namespace LoggingKata
 
 
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`) - DONE
-            
+            // Create a new corA Coordinate with your locA's lat and long - DONE
+            // Create a new Coordinate with your locB's lat and long - DONE
+            var corA = new GeoCoordinate();
+            var corB = new GeoCoordinate();
 
             for (int i = 0; i < locations.Length; i++) 
             {
-                locations[i] = tacoBell1;
+                corA.Latitude = locations[i].Location.Latitude;
+                corA.Longitude = locations[i].Location.Longitude;
+
+                // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`) - DONE
+
+                for (int j = 1; j < locations.Length; j++)
+                {
+                    corB.Latitude = locations[j].Location.Latitude;
+                    corB.Longitude = locations[j].Location.Longitude;
+
+                    // Now, compare the two using `.GetDistanceTo()`, which returns a double - DONE
+                    distance = corA.GetDistanceTo(corB);
+
+                    // If the distance is greater than the currently saved distance, update the distance and the two `ITrackable` variables you set above
+                    if (distance > newDistance)
+                    {
+                        newDistance = distance;
+                        tacoBell1 = locations[i];
+                        tacoBell2 = locations[j];
+                    }
+
+                }
+
             }
-
-            // Create a new corA Coordinate with your locA's lat and long - DONE
-            var corA = new GeoCoordinate(tacoBell1.Location.Latitude , tacoBell1.Location.Longitude);
-
-            // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`) - DONE
-
-            for (int i = 0; i < locations.Length; i++)
-            {
-                locations[i] = tacoBell2;
-            }
-
-            // Create a new Coordinate with your locB's lat and long - DONE
-            var corB = new GeoCoordinate(tacoBell2.Location.Latitude, tacoBell2.Location.Longitude);
-
-            // Now, compare the two using `.GetDistanceTo()`, which returns a double - DONE
-            distance = corA.GetDistanceTo(corB);
-            newDistance = distance;
-            ITrackable newTacoBell1 = null;
-            ITrackable newTacoBell2 = null;
-
-            // If the distance is greater than the currently saved distance, update the distance and the two `ITrackable` variables you set above
-            if ( distance > newDistance )
-            {
-                newDistance = distance;
-                tacoBell1 = newTacoBell1;
-                tacoBell2 = newTacoBell2;
-            }
-            Console.WriteLine(distance);
 
             // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
+            Console.WriteLine($"{tacoBell1.Name} and {tacoBell2.Name} are the furthest apart. " +
+                $"The coordinates for {tacoBell1.Name} are {tacoBell1.Location.Latitude}, {tacoBell1.Location.Longitude}. " +
+                $"The coordinates for {tacoBell2.Name} are {tacoBell2.Location.Latitude}, {tacoBell2.Location.Longitude}.  ");
 
 
 

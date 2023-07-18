@@ -47,7 +47,7 @@ namespace LoggingKata
 
             // Then, you'll need an instance of the TacoBell class
             // With the name and point set correctly - DONE
-            TacoBell tacoBell = new TacoBell()
+            TacoBell tacoBell = new TacoBell
             {
                 Name = name,
                 Location = new Point { Longitude = longitude, Latitude = latitude }
@@ -66,6 +66,11 @@ namespace LoggingKata
         {
             public string Name { get; set; }
             public Point Location { get; set; }
+
+            public TacoBell() 
+            {
+            
+            }
         }
     }
 }
