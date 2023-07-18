@@ -23,6 +23,14 @@ namespace LoggingKata
 
             logger.LogInfo($"Lines: {lines[0]}");
 
+            ITrackable tacoBell1 = null;
+            ITrackable tacoBell2 = null;
+            double finalDistance = 0;
+            double testDistance = 0;
+            var geo1 = new GeoCoordinate();
+            var geo2 = new GeoCoordinate();
+
+
             // Create a new instance of your TacoParser class
             var parser = new TacoParser();
 
